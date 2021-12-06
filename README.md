@@ -13,3 +13,9 @@
 * API para baixar fonte
 
   > pip install tableauserverclient
+
+```diff
+- API do tableau não trata os tipos 
+- (NaN e NaT), do pandas e numpy
+- Mudar para o tipo do python None
+```
