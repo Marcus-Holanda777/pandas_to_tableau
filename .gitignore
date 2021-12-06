@@ -1,0 +1,6 @@
+# ignorar excel
+*.xlsx
+~$.*
+
+# ignorar pasta
+__pycache__/
