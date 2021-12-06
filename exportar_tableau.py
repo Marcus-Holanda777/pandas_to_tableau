@@ -8,16 +8,23 @@ import numpy as np
 def retornaColTipos(frame):
     colunas = []
 
-    frame = frame.dropna()
+    datas = (date, datetime, np.datetime64)
+    inteiros = (np.int0, np.int8, np.int16, np.int32, np.int64, int)
+    texto = (str, np.object0)
+    pontos = (np.double, float, np.float16, np.float32, np.float64)
+
+    frame = frame.dropna()  # retirar colunas e linhas nulas
+
     for c in frame.columns:
-        if isinstance(frame[c].head(1).values[0], (date, datetime, np.datetime64)):
+        if isinstance(frame[c].head(1).values[0], datas):
             colunas.append(TableDefinition.Column(c, SqlType.date()))
-        if isinstance(frame[c].head(1).values[0], np.int64):
+        if isinstance(frame[c].head(1).values[0], inteiros):
             colunas.append(TableDefinition.Column(c, SqlType.int()))
-        if isinstance(frame[c].head(1).values[0], (str, np.object0)):
+        if isinstance(frame[c].head(1).values[0], texto):
             colunas.append(TableDefinition.Column(c, SqlType.text()))
-        if isinstance(frame[c].head(1).values[0], np.float64):
+        if isinstance(frame[c].head(1).values[0], pontos):
             colunas.append(TableDefinition.Column(c, SqlType.double()))
+
     return colunas
 
 
